@@ -1,20 +1,19 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class ExerciseText {
-		
+
 	public static void main(String[] args) throws FileNotFoundException {
 		// "C:\\Users\\Dell\\Desktop\\plik.txt"
-		
+
 		// System.out.println(fileReader("C:\\Users\\Dell\\Desktop\\plik.txt"));
-		
-    System.out.println("Number of words in text: " + numberOfWords(fileReader("C:\\Users\\Dell\\Desktop\\plik.txt")));
-		
-    // splitWords(fileReader("C:\\Users\\Dell\\Desktop\\plik.txt"));
-		
-    compareWords(splitWords(fileReader("C:\\\\Users\\\\Dell\\\\Desktop\\\\plik.txt")));
+		System.out.println("Number of words in text: " + numberOfWords(fileReader("C:\\Users\\Dell\\Desktop\\plik.txt")));
+		// splitWords(fileReader("C:\\Users\\Dell\\Desktop\\plik.txt"));
+		compareWords(splitWords(fileReader("C:\\\\Users\\\\Dell\\\\Desktop\\\\plik.txt")));
 	}
 	
 	public static String fileReader(String path) throws FileNotFoundException {
@@ -24,39 +23,40 @@ public class ExerciseText {
 		sc.close();
 		return fileReader.toLowerCase();
 	}
-	
+
 	public static int numberOfWords(String file) {
 		Scanner sc = new Scanner(file);
 		int count = 0;
-		while(sc.hasNext()) {
+		while (sc.hasNext()) {
 			sc.next();
 			count++;
 		}
 		sc.close();
 		return count;
 	}
-	
-	public static String[] splitWords(String file) {
+
+	public static List<String> splitWords(String file) {
+		List<String> arrStrings = new ArrayList<>();
 		Scanner sc = new Scanner(file);
 		String[] splitedArray = null;
 		splitedArray = file.split(" ");
-		return splitedArray;	
+		Arrays.sort(splitedArray);
+		for (int i = 0; i < splitedArray.length; i++) {
+			arrStrings.add(splitedArray[i]);
+		}
+		return arrStrings;
 	}
-	
-	public static void compareWords(String[] array) {
-		Arrays.sort(array);
-		String word = "";
+
+	public static void compareWords(List<String> arrStrings) {
 		int count = 0;
-		for(int i = 0; i < array.length; i++) {
-			word = array[i];
-			for(int j = 0; j < array.length-1; j++) {
-				String word2 = array[j];
-				if(word.equals(word2)) {
+		int size = arrStrings.size();
+		for (int i = 0; i < size; i++) {
+			String word = arrStrings.get(i);	
+			for (int j = 0; j < size; j++) {
+				if(word.equals(arrStrings.get(j))) {
 					count++;
 				}
 			}
-		System.out.println(word + " " + count);
-		}	
+			System.out.println(word + " " + count);
+		}
 	}
-
-}
