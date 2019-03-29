@@ -1,0 +1,26 @@
+public class Application {
+
+	double a;
+	double b;
+	
+	public static String algorithm(double a, double b) {
+		
+		boolean isFind = false;
+		
+		while(isFind) {
+			if(a%b == 0) {
+				isFind = true;
+			} else {
+				a -= b;;
+			}
+		}
+		return "NWD(a,b) = " + b;
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println(algorithm(10, 2));
+		
+	}
+	
+}
