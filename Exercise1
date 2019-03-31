@@ -2,20 +2,31 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class ExerciseText {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		// "C:\\Users\\Dell\\Desktop\\plik.txt"
 
-		// System.out.println(fileReader("C:\\Users\\Dell\\Desktop\\plik.txt"));
 		System.out.println("Number of words in text: " + numberOfWords(fileReader("C:\\Users\\Dell\\Desktop\\plik.txt")));
-		// splitWords(fileReader("C:\\Users\\Dell\\Desktop\\plik.txt"));
-		compareWords(splitWords(fileReader("C:\\\\Users\\\\Dell\\\\Desktop\\\\plik.txt")));
+		System.out.println();
+		
+		System.out.println("WHILE:");
+		setWords(compareWordsWhile(splitWords(fileReader("C:\\Users\\Dell\\Desktop\\plik.txt"))));
+		
+		System.out.println();
+		System.out.println("FOR:");
+		setWords(compareWordsFor(splitWords(fileReader("C:\\Users\\Dell\\Desktop\\plik.txt"))));
+		
+		
+
 	}
-	
+
 	public static String fileReader(String path) throws FileNotFoundException {
 		File file = new File(path);
 		Scanner sc = new Scanner(file);
@@ -37,7 +48,6 @@ public class ExerciseText {
 
 	public static List<String> splitWords(String file) {
 		List<String> arrStrings = new ArrayList<>();
-		Scanner sc = new Scanner(file);
 		String[] splitedArray = null;
 		splitedArray = file.split(" ");
 		Arrays.sort(splitedArray);
@@ -47,16 +57,50 @@ public class ExerciseText {
 		return arrStrings;
 	}
 
-	public static void compareWords(List<String> arrStrings) {
-		int count = 0;
+	public static String[] compareWordsFor(List<String> arrStrings) {
 		int size = arrStrings.size();
+		String[] words = new String[size];
 		for (int i = 0; i < size; i++) {
-			String word = arrStrings.get(i);	
+			int count = 0;
+			String word = arrStrings.get(i);
 			for (int j = 0; j < size; j++) {
-				if(word.equals(arrStrings.get(j))) {
+				if (word.equals(arrStrings.get(j))) {
 					count++;
 				}
+				words[i] = word + " " + count;
 			}
-			System.out.println(word + " " + count);
+
+		}
+		return words;
+	}
+
+	public static String[] compareWordsWhile(List<String> arrStrings) {
+		int size = arrStrings.size();
+		String[] words = new String[size];
+		while (size > 0) {
+			int count = 1;
+			int i = 0;
+			String word = arrStrings.get(i);
+			if (word.equals(arrStrings.get(i + 1))) {
+				count++;
+			}
+			words[i] = word + " " + count;
+			i++;
+			size--;
+		}
+		return words;
+	}
+
+	public static void setWords(String[] words) {
+		Set<String> setWords = new HashSet<>();
+		for (int i = 0; i < words.length; i++) {
+			setWords.add(words[i]);
+		}
+		Iterator<String> iteratorWords = setWords.iterator();
+		while (iteratorWords.hasNext()) {
+			String word = iteratorWords.next();
+			System.out.println(word);
 		}
 	}
+
+}
