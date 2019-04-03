@@ -1,3 +1,5 @@
+package pl.kodilla.additional;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -14,16 +16,14 @@ public class ExerciseText {
 		// "C:\\Users\\Dell\\Desktop\\plik.txt"
 
 		System.out.println("Number of words in text: " + numberOfWords(fileReader("C:\\Users\\Dell\\Desktop\\plik.txt")));
-		System.out.println();
 		
+		System.out.println();
 		System.out.println("WHILE:");
 		setWords(compareWordsWhile(splitWords(fileReader("C:\\Users\\Dell\\Desktop\\plik.txt"))));
 		
 		System.out.println();
 		System.out.println("FOR:");
 		setWords(compareWordsFor(splitWords(fileReader("C:\\Users\\Dell\\Desktop\\plik.txt"))));
-		
-		
 
 	}
 
@@ -75,18 +75,19 @@ public class ExerciseText {
 	}
 
 	public static String[] compareWordsWhile(List<String> arrStrings) {
-		int size = arrStrings.size();
+		int size = arrStrings.size()-1;
 		String[] words = new String[size];
-		while (size > 0) {
-			int count = 1;
-			int i = 0;
+		int i = 0;
+		while (size > 0) {	
 			String word = arrStrings.get(i);
+			int count = 1;
 			if (word.equals(arrStrings.get(i + 1))) {
 				count++;
-			}
+			} 
 			words[i] = word + " " + count;
 			i++;
 			size--;
+			
 		}
 		return words;
 	}
