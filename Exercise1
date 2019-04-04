@@ -78,16 +78,17 @@ public class ExerciseText {
 		int size = arrStrings.size()-1;
 		String[] words = new String[size];
 		int i = 0;
+		int count = 1;
 		while (size > 0) {	
 			String word = arrStrings.get(i);
-			int count = 1;
 			if (word.equals(arrStrings.get(i + 1))) {
 				count++;
-			} 
-			words[i] = word + " " + count;
+			} else {
+				words[i] = word + " " + count;
+				count = 1;
+			}
 			i++;
 			size--;
-			
 		}
 		return words;
 	}
