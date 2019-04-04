@@ -74,9 +74,9 @@ public class ExerciseText {
 		return words;
 	}
 
-	public static String[] compareWordsWhile(List<String> arrStrings) {
+	public static void compareWordsWhile(List<String> arrStrings) {
 		int size = arrStrings.size()-1;
-		String[] words = new String[size];
+		Set<String> words = new HashSet<>();
 		int i = 0;
 		int count = 1;
 		while (size > 0) {	
@@ -84,13 +84,18 @@ public class ExerciseText {
 			if (word.equals(arrStrings.get(i + 1))) {
 				count++;
 			} else {
-				words[i] = word + " " + count;
+				words.add(word + " " + count);
 				count = 1;
 			}
 			i++;
 			size--;
 		}
-		return words;
+		
+		Iterator<String> iteratorWords = words.iterator();
+		while (iteratorWords.hasNext()) {
+			String word = iteratorWords.next();
+			System.out.println(word);
+		}
 	}
 
 	public static void setWords(String[] words) {
