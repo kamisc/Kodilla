@@ -83,8 +83,6 @@ public class ExerciseText {
 			String word = arrStrings.get(i);
 			if (word.equals(arrStrings.get(i + 1))) {
 				count++;
-			} else if(size == 0) {
-				words.add(arrStrings.get(arrStrings.size()) + " " + count);
 			} else {
 				words.add(word + " " + count);
 				count = 1;
@@ -92,6 +90,8 @@ public class ExerciseText {
 			i++;
 			size--;
 		}
+		
+		words.add(arrStrings.get(arrStrings.size()-1) + " " + count);
 		
 		Iterator<String> iteratorWords = words.iterator();
 		while (iteratorWords.hasNext()) {
