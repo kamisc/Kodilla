@@ -83,6 +83,8 @@ public class ExerciseText {
 			String word = arrStrings.get(i);
 			if (word.equals(arrStrings.get(i + 1))) {
 				count++;
+			} else if(size == 0) {
+				words.add(arrStrings.get(arrStrings.size()) + " " + count);
 			} else {
 				words.add(word + " " + count);
 				count = 1;
