@@ -1,0 +1,43 @@
+import java.util.regex.Pattern;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class PrimeNumbersWithStream {
+
+	public static void main(String[] args) {
+
+		String number = "123632155874654885";
+
+		Stream<String> streamNumber = Pattern.compile("").splitAsStream(number);
+
+		int sum = streamNumber
+					.map(Integer::valueOf)
+					.mapToInt(x -> x)
+					.filter(x -> x >= 2)
+					.filter(x -> isPrime(x))
+					.sum();
+
+		System.out.println(sum);
+
+	}
+	
+	// Method with stream - find prime numbers
+	public static Boolean isPrime(Integer n) {
+	    return IntStream.rangeClosed(2, (int) Math.sqrt(n))
+	            .allMatch(i -> n % i != 0);
+	}
+	
+	// Method without stream - find prime numbers
+	public static Boolean isPrimeNumber(Integer n) {
+		if (n < 2) {
+			return false;
+		}
+		for (Integer i = 2; i <= n / 2; i++) {
+			if (n % i == 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+}
